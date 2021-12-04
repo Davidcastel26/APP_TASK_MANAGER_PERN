@@ -7,8 +7,23 @@ const getAllTasks = async (req, res) => {
     res.json('reatrieving a task')
 }
 
+const getTask = async (req, res) => {
+    res.send('retrieving a single task');
+}
+
+const createTask = async (req, res) => {
+    res.send('creating a new tasks');
+} 
+
+const deleteTask = async (req, res) => {
+    res.send('deleting a task');
+}
+
+
 module.exports = {
     getAllTasks,
+    getTask,
+    createTask,
 
 }
 
