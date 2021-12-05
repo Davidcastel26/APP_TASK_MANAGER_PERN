@@ -16,6 +16,13 @@ const getAllTasks = async (req, res) => {
 }
 
 const getTask = async (req, res) => {
+
+    const {id} = req.params
+
+    // console.log(req.params.id);
+    const result = await pool.query('SELECT * FROM task WHERE id = $1', [id])
+    console.log(result);
+
     res.send('retrieving a single task');
 }
 
