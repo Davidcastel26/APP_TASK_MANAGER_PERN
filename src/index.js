@@ -11,5 +11,11 @@ app.use(express.json())
 
 app.use(tasksRoutes)
 
+app.use((err,req, res, next)=>{
+    return res.json({
+        meesage:err.message
+    })
+})
+
 app.listen(4000)
 console.log('server on port 4000');
