@@ -12,6 +12,9 @@ const getTask = async (req, res) => {
 }
 
 const createTask = async (req, res) => {
+    const task = req.body
+
+    console.log(task);
     res.send('creating a new tasks');
 } 
 
