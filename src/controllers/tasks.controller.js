@@ -4,7 +4,15 @@ const getAllTasks = async (req, res) => {
     // const result = await pool.query('SELECT NOW()');
     // console.log(result);
     // res.json(result.rows[0].now)
-    res.json('reatrieving a task')
+    // res.json('reatrieving a task')
+
+    try {
+        const allTasks = await pool.query('SELECT * FROM task')
+    // console.log(allTask);
+        res.send(allTasks.rows);
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 const getTask = async (req, res) => {
