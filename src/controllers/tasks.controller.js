@@ -57,6 +57,12 @@ const createTask = async (req, res) => {
 } 
 
 const deleteTask = async (req, res) => {
+
+    const {id} = req.params;
+    //before check the const rust create a log to check
+    // console.log(id);
+    const result = await pool.query('DELETE FROM task WHERE id = $1', [id])
+    
     res.send('deleting a task');
 }
 
