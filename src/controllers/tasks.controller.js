@@ -17,13 +17,24 @@ const getAllTasks = async (req, res) => {
 
 const getTask = async (req, res) => {
 
-    const {id} = req.params
+    try {
+        const {id} = req.params
 
     // console.log(req.params.id);
-    const result = await pool.query('SELECT * FROM task WHERE id = $1', [id])
-    console.log(result);
+        const result = await pool.query('SELECT * FROM task WHERE id = $1', [id])
+        // console.log(result);
 
-    res.send('retrieving a single task');
+        if(result.rows.length === 0)
+            return res.status(404).json({
+                message:"Ups! Task not found :("
+        });
+
+    // res.send('retrieving a single task');
+        return res.json(result.rows);
+
+    } catch (error) {
+        console.log(error.message);
+    }
 }
 
 const createTask = async (req, res) => {
