@@ -16,7 +16,7 @@ const Navbar = () => {
 
     return (
         <Box sx={{ flexGrow: 1}}>
-            <AppBar position='state' color='transparent'>
+            <AppBar position='static' color='transparent'>
                 <Container>
                     <Toolbar>
                         <Typography variant='h6' sx={{ flexGrow: 1}}>
