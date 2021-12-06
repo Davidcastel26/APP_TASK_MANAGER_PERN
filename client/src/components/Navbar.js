@@ -19,8 +19,8 @@ const Navbar = () => {
             <AppBar position='state' color='transparent'>
                 <Container>
                     <Toolbar>
-                        <Typography sx={{ flexGrow: 1}}>
-                            <Link to='/'>
+                        <Typography variant='h6' sx={{ flexGrow: 1}}>
+                            <Link to='/' style={{ textDecoration:'none', color:'whitesmoke'}}>
                                 PERN Stack
                             </Link> 
                         </Typography>
