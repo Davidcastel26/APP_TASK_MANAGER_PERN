@@ -7,7 +7,8 @@ import { Button,
          CardContent,
          Grid,
          TextField,
-         Typography } from '@mui/material';
+         Typography,
+         CircularProgress } from '@mui/material';
 
 const TaskForm = () => {
 
@@ -17,6 +18,9 @@ const TaskForm = () => {
         title:'',
         description:''
     })
+
+    const [loading, setLoading] = useState(false) 
+
     //useEffect
 
     //to navigate
@@ -28,6 +32,8 @@ const TaskForm = () => {
         e.preventDefault()
         // console.log('submit');
 
+        setLoading(true)
+
         const res = await fetch("http://localhost:4000/tasks", {
             method: "POST",
             body: JSON.stringify(task),
@@ -36,6 +42,7 @@ const TaskForm = () => {
         const data = await res.json();
         // console.log(data);
 
+        setLoading(false)
         navigate('/')
     }
 
@@ -90,8 +97,19 @@ const TaskForm = () => {
                                 InputLabelProps={{style:{color:"white"}}}
                             />
 
-                            <Button variant='contained' color='primary' type='submit'>
-                                Save
+                            <Button 
+                                variant='contained' 
+                                color='primary' 
+                                type='submit'
+                                disabled={!task.title || !task.description}
+                            >
+                                {loading ? (<CircularProgress
+                                        color='inherit'
+                                        size={24}
+                                    />): (
+                                    'Create'
+                                
+                                )}
                             </Button>
                         
                         </form>
