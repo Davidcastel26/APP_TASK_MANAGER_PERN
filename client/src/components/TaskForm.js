@@ -1,5 +1,6 @@
 //react
 import {useState, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
 //ui
 import { Button,
          Card,
@@ -10,15 +11,32 @@ import { Button,
 
 const TaskForm = () => {
 
-
+    //REACT 
+    //useState
     const [task, setTask] = useState({
         title:'',
         description:''
     })
+    //useEffect
 
-    const handleSubmit = (e) =>{
+    //to navigate
+    const navigate = useNavigate()
+
+    //Handelers
+
+    const handleSubmit = async(e) =>{
         e.preventDefault()
-        console.log('submit');
+        // console.log('submit');
+
+        const res = await fetch("http://localhost:4000/tasks", {
+            method: "POST",
+            body: JSON.stringify(task),
+            headers:{'Content-Type':'application/json'}
+        })
+        const data = await res.json();
+        // console.log(data);
+
+        navigate('/')
     }
 
     const handleChange = (e) => {
