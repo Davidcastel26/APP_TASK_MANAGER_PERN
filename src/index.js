@@ -5,11 +5,13 @@ const cors = require('cors')
 
 //routes
 const tasksRoutes = require('./routes/tasks.routes');
-const { use } = require('./routes/tasks.routes');
+// const { use } = require('./routes/tasks.routes');
 
 const app = express();
 
-app.use(cors)
+const PORT = 4000;
+
+app.use(cors())
 app.use(morgan('dev'))
 app.use(express.json())
 
@@ -22,4 +24,4 @@ app.use((err,req, res, next)=>{
 })
 
 app.listen(4000)
-console.log('server on port 4000');
+console.log(`server on port ${PORT}`);

@@ -10,7 +10,9 @@ const getAllTasks = async (req, res, next) => {
         // throw new Error('Something went wrong')
         const allTasks = await pool.query('SELECT * FROM task')
     // console.log(allTask);
-        res.send(allTasks.rows);
+        // res.send(allTasks.rows);
+        res.json(allTasks.rows);
+
     } catch (error) {
         next(error)
     }
@@ -31,7 +33,7 @@ const getTask = async (req, res, next) => {
         });
 
     // res.send('retrieving a single task');
-        return res.json(result.rows);
+        res.json(result.rows[0]);
 
     } catch (error) {
         next(error)
@@ -40,13 +42,11 @@ const getTask = async (req, res, next) => {
 
 const createTask = async (req, res, next) => {
     const { title, description} = req.body
-
     try {
         // console.log(title, description);
         const rep = await pool.query(
         "INSERT INTO task (title, description) VALUES ($1, $2) RETURNING *",
         [ title, description ]);
-
         // console.log(rep);
         res.json(rep.rows[0])
 
@@ -70,7 +70,7 @@ const deleteTask = async (req, res, next) => {
             message:"Task not found"
          })
 
-        return res.sendStatus('204');
+        res.sendStatus('204');
         
     } catch (error) {
         next(error)
@@ -88,11 +88,11 @@ const updateTask = async (req, res, next) => {
             [title,description,id]
         )
     
-        if(result.rows.length === 0)return res.status(404).json({
+        if(response.rows.length === 0)return res.status(404).json({
             message:"task not found"
         })
     
-        res.send(result.rows[0]);
+        res.json(response.rows[0]);
 
     } catch (error) {
         next(error)
