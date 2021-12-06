@@ -12,6 +12,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
+        <Navbar />
         {/* WE ARE USEING THE CONTAINER FOR THE UI DESING  ------------------------------------ */}
         <Container>
           {/* WE ARE SETTING THE ROUTES RIGHT HERE -----------------------------------------   */}
