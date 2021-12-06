@@ -1,5 +1,5 @@
 //react
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 //ui
 import { Button,
@@ -20,8 +20,6 @@ const TaskForm = () => {
     })
 
     const [loading, setLoading] = useState(false) 
-
-    //useEffect
 
     //to navigate
     const navigate = useNavigate()
