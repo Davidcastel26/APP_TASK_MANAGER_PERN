@@ -1,6 +1,33 @@
-import { Button, Card, CardContent, Grid, TextField, Typography } from '@mui/material';
+//react
+import {useState, useEffect} from 'react';
+//ui
+import { Button,
+         Card,
+         CardContent,
+         Grid,
+         TextField,
+         Typography } from '@mui/material';
 
 const TaskForm = () => {
+
+
+    const [task, setTask] = useState({
+        title:'',
+        description:''
+    })
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
+        console.log('submit');
+    }
+
+    const handleChange = (e) => {
+        // console.log(e.target.name, e.target.value);
+        setTask({...task, [e.target.name]: e.target.value})
+    }
+
+
+
     return (
         <Grid container direction='column' alignItems='center' justifyContent='center'>
             <Grid item xs={3}>
@@ -15,7 +42,8 @@ const TaskForm = () => {
                         CREATE TASK HERE!   
                     </Typography>
                     <CardContent>
-                        <form action="">
+                        <form action="" onSubmit={handleSubmit}>
+
                             <TextField 
                                 variant='filled'
                                 label='Write your title'
@@ -23,9 +51,12 @@ const TaskForm = () => {
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
+                                name='title'
+                                onChange={handleChange}
                                 inputProps={{style:{color:"white"}}}
                                 InputLabelProps={{style:{color:"white"}}}
                             />
+
                             <TextField
                                 variant='filled'
                                 label='Write your description'
@@ -35,12 +66,16 @@ const TaskForm = () => {
                                     display: 'block',
                                     margin: '.5rem 0'
                                 }}
+                                name='description'
+                                onChange={handleChange}
                                 inputProps={{style:{color:"white"}}}
                                 InputLabelProps={{style:{color:"white"}}}
                             />
+
                             <Button variant='contained' color='primary' type='submit'>
                                 Save
                             </Button>
+                        
                         </form>
                     </CardContent>
                 </Card>
