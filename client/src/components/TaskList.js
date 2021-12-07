@@ -1,17 +1,37 @@
+//REACT
 import { useEffect, useState } from "react"
+//MATERIAL UI
 import { Button,
          Card,
          CardContent,
          Typography } from '@mui/material'
 
+          
 const TaskList = () => {
   
   const [tasks, setTasks] = useState([])
 
+  //FUNCTIONS
   const loadTasks = async() =>{
     const response = await fetch(`http://localhost:4000/tasks`);
     const data = await response.json()
     setTasks(data)
+  }
+
+  const handleDelete = async(id)=>{
+    try {
+          //deleting the info in the backend
+        await fetch(`http://localhost:4000/tasks/${id}`,{
+          method:"DELETE",
+        })
+      //deleteing in the frontend
+        setTasks(tasks.filter(task => task.id !== id ))
+      // const data = await response.json()
+      // console.log(data);
+      // console.log(response);
+    } catch (error) {
+        console.log(error);      
+    }
   }
 
   useEffect(()=>{
@@ -26,7 +46,13 @@ const TaskList = () => {
               <Card 
                 style={{ marginBottom:".7rem", backgroundColor:"#1e272e"
               }}>
-                <CardContent style={{display:"flex", justifyContent:"space-between"}} >
+                <CardContent 
+                  style={{
+                    display:"flex", 
+                    justifyContent:"space-between"
+                  }}
+                  key={task.id}
+                >
                   
                   <div style={{ color:"white"}}>
                   <Typography>{task.title}</Typography>
@@ -43,7 +69,7 @@ const TaskList = () => {
                   <Button 
                     variant="contained"
                     color="warning"
-                    onClick={()=> console.log('delete')}
+                    onClick={()=>handleDelete(task.id)}
                     style={{ marginLeft:".5rem" }}
                   >
                     DELETE
