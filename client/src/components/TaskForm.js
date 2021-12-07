@@ -1,6 +1,6 @@
 //react
 import {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 //ui
 import { Button,
          Card,
@@ -13,7 +13,7 @@ import { Button,
 const TaskForm = () => {
 
     //REACT 
-    //useState
+    //useState --------------------------------------------------
     const [task, setTask] = useState({
         title:'',
         description:''
@@ -21,10 +21,11 @@ const TaskForm = () => {
 
     const [loading, setLoading] = useState(false) 
 
-    //to navigate
+    //REACT TOUTER DOM -------------------------------------------
     const navigate = useNavigate()
+    const params = useParams()
 
-    //Handelers
+    //Handelers --------------------------------------------------
 
     const handleSubmit = async(e) =>{
         e.preventDefault()
@@ -48,8 +49,17 @@ const TaskForm = () => {
         // console.log(e.target.name, e.target.value);
         setTask({...task, [e.target.name]: e.target.value})
     }
+    
+    //hook effect -----------------------------------------------
 
+    
 
+    useEffect(()=>{
+        // console.log(params );
+        if(params.id){
+            console.log('fetch tasks');
+        }
+    }, [params.id])    
 
     return (
         <Grid container direction='column' alignItems='center' justifyContent='center'>
